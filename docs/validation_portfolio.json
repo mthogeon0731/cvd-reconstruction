@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-07",
+  "scope": "Portfolio refresh pre-push clean-copy verification",
+  "baseline_commit": "1b8dc7f22232736e9d88612767f1e919d616934f",
+  "version": "0.2.2",
+  "environment": "Windows 11 build 26200 AMD64 / bundled CPython 3.12.14; new venv; no system site packages",
+  "product_tests": {
+    "tests": "360",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "266.840"
+  },
+  "commands": [
+    {
+      "label": "install",
+      "args": [
+        "-m",
+        "pip",
+        "--isolated",
+        "install",
+        "--no-cache-dir",
+        "--no-index",
+        "--no-build-isolation",
+        "--no-deps",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 3.56
+    },
+    {
+      "label": "pip-check",
+      "args": [
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.11
+    },
+    {
+      "label": "installed-import",
+      "args": [
+        "-I",
+        "-c",
+        "import cvd_cbd,importlib.metadata as m,pathlib,sys; p=pathlib.Path(cvd_cbd.__file__).resolve(); assert p.is_relative_to(pathlib.Path(sys.prefix).resolve()); d=m.metadata('cvd-cbd-reference-rebuild'); assert d['License-Expression']=='MIT'; assert cvd_cbd.__version__==d['Version']=='0.2.2'; print('installed package, version and MIT metadata PASS')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.17
+    },
+    {
+      "label": "minimal",
+      "args": [
+        "-I",
+        "<CHECKOUT>\\examples\\minimal.py"
+      ],
+      "exit_code": 0,
+      "seconds": 17.5
+    },
+    {
+      "label": "collect",
+      "args": [
+        "-m",
+        "pytest",
+        "tests",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "exit_code": 0,
+      "seconds": 16.53
+    },
+    {
+      "label": "tests",
+      "args": [
+        "-m",
+        "pytest",
+        "tests",
+        "-q",
+        "-ra",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "junit_family=xunit1",
+        "--junitxml=<LOGS>\\tests.xml",
+        "--basetemp=<LOGS>\\test-temp"
+      ],
+      "exit_code": 0,
+      "seconds": 268.19
+    },
+    {
+      "label": "links",
+      "args": [
+        "scripts/check_repository.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.31
+    },
+    {
+      "label": "generate",
+      "args": [
+        "-m",
+        "cvd_cbd",
+        "study",
+        "generate",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs"
+      ],
+      "exit_code": 0,
+      "seconds": 5.89
+    },
+    {
+      "label": "validate",
+      "args": [
+        "-m",
+        "cvd_cbd",
+        "study",
+        "validate",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs"
+      ],
+      "exit_code": 0,
+      "seconds": 7.09
+    },
+    {
+      "label": "demo",
+      "args": [
+        "-m",
+        "cvd_cbd",
+        "study",
+        "demo",
+        "--config",
+        "configs/synthetic_study.json",
+        "--out",
+        "outputs/portfolio_demo"
+      ],
+      "exit_code": 0,
+      "seconds": 80.08
+    },
+    {
+      "label": "verify-demo",
+      "args": [
+        "verification/verify_run.py",
+        "--run",
+        "outputs/portfolio_demo",
+        "--out",
+        "outputs/portfolio_demo_verification.json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.59
+    },
+    {
+      "label": "render",
+      "args": [
+        "scripts/render_example.py",
+        "--run",
+        "outputs/portfolio_demo",
+        "--out",
+        "outputs/rendered"
+      ],
+      "exit_code": 0,
+      "seconds": 2.0
+    },
+    {
+      "label": "render-repeat",
+      "args": [
+        "scripts/render_example.py",
+        "--run",
+        "outputs/portfolio_demo",
+        "--out",
+        "outputs/rendered_repeat"
+      ],
+      "exit_code": 0,
+      "seconds": 1.78
+    }
+  ],
+  "code_and_test_sha256": {
+    "cvd_cbd/__init__.py": "1bb882b45e629451ee34529b59cdab99cb168c6a3a44ef10a2c17647a8b9389d",
+    "cvd_cbd/__main__.py": "d031c7f0250ce65dd4caf2d6b7cd8081c84b0e01b750eb5886f04e524cafea99",
+    "cvd_cbd/calibration.py": "2a47be1ff6582fecd52e5b45f6ade7db8d821106e0dfd01042739abe1757b5bd",
+    "cvd_cbd/cli.py": "c177f161a4833ee2d2eb76d8008954b27189e508e44685b5a087ed72ed4725ea",
+    "cvd_cbd/config.py": "2a2308d8f4b80cb46e275083c2c3f19ba12174143b95b52eac9c4df601004334",
+    "cvd_cbd/data.py": "3cca74fc0bd95c94d75d1c650fc47228cd846458c4db9dce185cac8837d10927",
+    "cvd_cbd/dataset.py": "decb7287e346da188fe28c2c26977da00f75395c01c2153b11b54990f93e7c0f",
+    "cvd_cbd/demo.py": "8e84fb0a62445afa82f2240d57057c5bda5e5459b9b87fbec43b28342b412f70",
+    "cvd_cbd/design.py": "b864b88d8e866d910a9ffc4dccc4d2bf5c2aa26505ab33f892b0833f9de68bc6",
+    "cvd_cbd/imaging.py": "c63c7029057994476e8ef0970cd84a92ceb9c1c15f621d1bbebb482983422f35",
+    "cvd_cbd/infer.py": "daa3228c5f4330eb1beffbb158a83d18df6ae3f18e2df60390e3af2f4ea5f86b",
+    "cvd_cbd/input_contracts.py": "8de569dbe05354c9d48cfc9b746e9b7b61e5b753f35ae5bdb987cd67ef6a002f",
+    "cvd_cbd/io_utils.py": "f53eff08e2253d16af4f60ef23aaf01d1bc9318fd7a8813ca75d530a3f353abb",
+    "cvd_cbd/json_utils.py": "7cd504bf90a10cadc2f14d9d2128e1a7082d4b6135c1dbc5e4eb713a87a51bf9",
+    "cvd_cbd/manifest.py": "25c9ee49cbecb270fbda39dde75ce7bfe531ff4cf27f5923a30dce5a80823c3d",
+    "cvd_cbd/metrology.py": "5109f345cff5f5f74028b4a4841486139e8529e7e041918a3ca789ecba44e094",
+    "cvd_cbd/modeling.py": "f12b622487ab00bec32dbad27ad20ea1c5e1fce59626dd35ab544f10e47ef021",
+    "cvd_cbd/monte_carlo.py": "4b761ea0752834afe7e171d0264ff51beb872c133e7474e25f63dbd52fa3f3e8",
+    "cvd_cbd/physics.py": "7938c33ed714c7d43335850c3083b412f8d0446fb552dcbca0c7495c913122ad",
+    "cvd_cbd/similitude.py": "0114ca3c36f86cff2f46b232413dd1046c5bec52a1a9c4457f00729de9f3f94e",
+    "cvd_cbd/study_cli.py": "05fa4713ea2e861f23b579253d2fb2cfc2b7b7a7a5db32a11d1091f244c587f1",
+    "cvd_cbd/study_config.py": "6b017d6f0f8e9e753f1f2e3f3b46189998e5c3d95798c09d1c4b2c994da8b1e2",
+    "cvd_cbd/study_design.py": "74ebf6001504954a9f237b57c1b8e83f5de350b954d146e4ad0aa4f882c9cdcb",
+    "cvd_cbd/surrogate.py": "d566986e15af833159907e004e074c2ee623c486d043cc71ba8c39962d4b285b",
+    "cvd_cbd/synthetic.py": "75e7645a6dbae7abd02db4c32ea6c22bb6c7738b002851c90a5ecd71fc3ff8aa",
+    "cvd_cbd/thickness.py": "cfa534fd65348bfeac6fcc7764f1a9aebd7a5d2e80d23fb0ba90dda9eb020fbf",
+    "cvd_cbd/uncertainty.py": "068c55b3a68d03a5eb517ba8e1f4099bc3905a3a4bd2c70da98919d767c5d3ec",
+    "cvd_cbd/workflow.py": "ccf46e055f4741414af63e70e078c0c69b8d8eaa1f0ce605e66a57228c2ca921",
+    "tests/test_calibration.py": "1f52fae9e127100da3405f1bf1b57b1f1762a7489407dfcfa46a14614b6b4357",
+    "tests/test_contracts.py": "11c096e7ca39cbdfb9efa5915b08f055196b3b42e50364f523b91195089f3042",
+    "tests/test_e2e_synthetic.py": "8f578267b9e97aa27b786af398c5284ebe047fb54dcfb78e6bba6d499c159b5f",
+    "tests/test_infer_and_uncertainty.py": "48a59d83fc9db2714f2b6e4e8e64b2753f09b29c12f38ab6c6de234fa999a701",
+    "tests/test_json_duplicates.py": "c99b8539854d62083c3fd4a92354d3708b068a02260d0c3071cb1e6f3d9a332b",
+    "tests/test_metrology.py": "0a35b65eeaf0c707e614d7aa7cbd7a5b7fa2ba8cb7074aec945ad8a35e002130",
+    "tests/test_modeling.py": "017cd181985d37c843a974bb76382ba30955668b530020a3235c9dc52b08f1cb",
+    "tests/test_physics.py": "775e48dd959c390f34b8a91804fd846b80d614da245b6aabc5f1cb29c323eeba",
+    "tests/test_pipeline.py": "e5fa3d7c59f0047324815a34cecd583c4c1b27f706fb35fd557c7a44e00310cd",
+    "tests/test_rebuild_physics.py": "3b3d74c1b8a44f2be692814ac4a739416037f2e827b30f5582f247e8efd35f96",
+    "tests/test_remediation_contracts.py": "bd85c09de7ca538cddb1b908f3bb8ba1fd241b1018a8b7851eec0ab81d3a81fb",
+    "tests/test_remediation_pixel.py": "d8816c11381a69e30e3091b7954b465a115fdb0e45be427636d87514c420f900",
+    "tests/test_remediation_provenance.py": "190469c27f9deeacad213456861034c0730a77b8ffea19d8ff44226fc5086d35",
+    "tests/test_remediation_uncertainty.py": "ea7b6b8454628c983ce76831b01912ec157e4b7a039732011493fba0c1b0d316",
+    "tests/test_thickness.py": "06a9b994dc83dbf27276ec71ac8ae82b39771c1a820670cba9f6241574bd53f3"
+  },
+  "source_hash_normalization": "LF line endings, matching .gitattributes and Git blob content",
+  "dependencies": "Fresh --no-cache-dir index install of requirements-build-lock.txt and requirements-lock.txt; 26 pins",
+  "figure_check": "Initial new run and clean-copy new run yield identical plotted source/summary/PNG hashes; same-run repeated render also byte-identical",
+  "render_check": "GitHub Markdown API HTML for both READMEs; browser visual check with local assets and approximate GitHub CSS, three images each loaded; no horizontal page overflow in inspected Korean preview",
+  "render_limit": "Private repository web page unavailable in unsigned-in browser. Authenticated API used; actual hosted private-page CSS not visually confirmed.",
+  "not_run": [
+    "external adapted 145-case audit",
+    "untouched original audit",
+    "independent 89-case suite",
+    "14-stage CLI replay",
+    "separate 14-case smoke procedure",
+    "other OS/Python",
+    "GitHub Actions",
+    "real OM/FE-SEM"
+  ],
+  "remote_clone": "Separate post-push check is reported to owner with exact commit; not pre-claimed here"
+}

@@ -1,0 +1,113 @@
+{
+  "origin": "SYNTHETIC",
+  "seed": 0,
+  "config": {
+    "origin": "SYNTHETIC",
+    "seed": 0,
+    "w_um": 30.0,
+    "h_um": 30.0,
+    "faces": 4,
+    "wall_materials": [
+      "pdms",
+      "pdms",
+      "glass",
+      "pdms"
+    ],
+    "end_material": "pdms",
+    "end_rate_ratio": 1.0,
+    "C0_mol_m3": 50.0,
+    "Vm_m3_mol": 1.45e-05,
+    "D_ref_m2_s": 6e-10,
+    "D_ref_T_C": 25.0,
+    "eta_ref_Pa_s": 0.00089,
+    "D_ref_source": "SYNTHETIC assumption; not a measured bath value",
+    "gly_basis": "mass_pct",
+    "ar_ladder": [
+      9,
+      13,
+      18,
+      25,
+      35,
+      49
+    ],
+    "top_offset_um": 50.0,
+    "window_half_um": 16.0,
+    "tile_px": 32,
+    "wall_margin_px": 4,
+    "invalid_pixel_fraction_max": 0.01,
+    "t_min": 0.0001,
+    "t_max": 2.0,
+    "sc_target": 0.9,
+    "inner_splits": 3,
+    "mc_repeats": 4000,
+    "mc_noise_sd": 0.05,
+    "mc_noise_kind": "additive",
+    "map_observable": "endpoints",
+    "map_ar_limit": 1000000.0,
+    "induction_fraction": 0.05,
+    "nonlinear_alpha": 0.05,
+    "allow_flagged_growth": false,
+    "min_top_nm": 1.0
+  },
+  "environment": {
+    "python": "3.12.14",
+    "OS": "Windows-11-10.0.26200-SP0",
+    "versions": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0",
+      "joblib": "1.6.0"
+    }
+  },
+  "input_root": "<RUN>/SYNTHETIC_inputs",
+  "input_creation": "cvd_cbd.synthetic.generate via cvd_cbd study demo; no external observations",
+  "n_rois": 144,
+  "n_conditions": 6,
+  "nested_selection": {
+    "n_measurements": 144,
+    "R2": 0.9967539337015857,
+    "RMSE_nm": 2.657989667120674,
+    "MAE_nm": 1.3580405884660953,
+    "MAPE_pct": 1.8791717201354419,
+    "relative_bias_pct": 0.06537327717585624,
+    "relative_1sigma_pct": 4.672584679183854,
+    "n_relative": 144,
+    "ddof": 1,
+    "n_conditions": 6,
+    "condition_balanced_RMSE_nm": 2.657989667120674
+  },
+  "similitude_cross_fitted": {
+    "origin": "SYNTHETIC",
+    "n_points": 36,
+    "n_conditions": 6,
+    "n_trenches": 72,
+    "fixed_theory_R2": 0.9987861679926912,
+    "RMSE_fraction": 0.010043235013578644,
+    "fitted_parameters": 0,
+    "observation": "equal-area union of actual tile z intervals; same side material assumed at top and bot",
+    "scientific_status": "SYNTHETIC common physical generator: integration check, not independent physical validation"
+  },
+  "similitude_synthetic_labels": {
+    "origin": "SYNTHETIC",
+    "n_points": 36,
+    "n_conditions": 6,
+    "n_trenches": 72,
+    "fixed_theory_R2": 0.9998866852151083,
+    "RMSE_fraction": 0.0030678354292110505,
+    "fitted_parameters": 0,
+    "observation": "equal-area union of actual tile z intervals; same side material assumed at top and bot",
+    "scientific_status": "SYNTHETIC common physical generator: integration check, not independent physical validation"
+  },
+  "sources_sha256": {
+    "SYNTHETIC_results/evaluation/selected_oof.csv": "0f91e588c88b02e20acc985a43681672fe80db7e160aba53ccb57f3fecef46b8",
+    "SYNTHETIC_results/similitude_cross_fitted/points.csv": "e69dbf4cb1fb0503f1e3c25ed9fd0c9b49baa76856f81fc110312a0845a96ad9",
+    "SYNTHETIC_results/evaluation/metrics.json": "db4ab120dbe3138cc7c4035a2ec5612f49c0063a904c3a8e8b33d64cbda47cca",
+    "SYNTHETIC_results/similitude_cross_fitted/report.json": "2054a3fbfddeffab6fb8f4855ba6b30cc5f750e8d595aa980b7356781b4065e8",
+    "SYNTHETIC_results/similitude_fesem/report.json": "55e6b44c073150d6cb0b632f7a4a1b8067474a7af60ccd0e4dcb16e462fd1ce4"
+  },
+  "figure_sha256": "c87417ff3498f11046d90a2c0c7af650917e23813ac10d46df8b21073f7d095f",
+  "interpretation": "Shared synthetic physical generator; not experimental validation"
+}

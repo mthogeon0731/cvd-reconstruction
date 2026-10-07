@@ -35,6 +35,7 @@ provenance/
 *.tif
 *.tiff
 *.png
+!docs/assets/synthetic-results.png
 *.jpg
 *.jpeg
 *.pdf

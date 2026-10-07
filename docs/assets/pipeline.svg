@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="420" viewBox="0 0 1040 420" role="img" aria-labelledby="title desc">
+  <title id="title">CVD/CBD study pipeline</title>
+  <desc id="desc">Registered microscope images and labels feed corrected ROI features and condition-held-out thickness evaluation. Planar growth, viscosity and geometry feed fixed reaction-diffusion theory. Paired bottom/top thickness ratios are compared on the same observation windows. A separate Monte Carlo calculation propagates supplied uncertainty assumptions.</desc>
+  <defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="none" stroke="#718396" stroke-width="1.2"/></marker></defs>
+  <rect width="1040" height="420" rx="12" fill="#f5f7fa"/>
+  <g font-family="Arial, sans-serif">
+    <text x="28" y="34" font-size="12" font-weight="bold" fill="#536678" letter-spacing="1.2">INPUTS</text>
+    <text x="366" y="34" font-size="12" font-weight="bold" fill="#536678" letter-spacing="1.2">PROCESSING</text>
+    <text x="704" y="34" font-size="12" font-weight="bold" fill="#536678" letter-spacing="1.2">OUTPUTS</text>
+    <g fill="white" stroke="#d5dee6">
+      <rect x="28" y="52" width="302" height="91" rx="7"/><rect x="366" y="52" width="302" height="91" rx="7"/><rect x="704" y="52" width="308" height="91" rx="7"/>
+      <rect x="28" y="177" width="302" height="91" rx="7"/><rect x="366" y="177" width="302" height="91" rx="7"/><rect x="704" y="177" width="308" height="91" rx="7"/>
+      <rect x="28" y="302" width="302" height="72" rx="7"/><rect x="366" y="302" width="302" height="72" rx="7"/><rect x="704" y="302" width="308" height="72" rx="7"/>
+    </g>
+    <g stroke="#718396" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+      <path d="M332 98h28"/><path d="M670 98h28"/><path d="M332 222h28"/><path d="M670 222h28"/>
+      <path d="M332 338h28"/><path d="M670 338h28"/>
+      <path d="M858 145v25"/>
+    </g>
+    <g font-size="16" font-weight="bold" fill="#19364b">
+      <text x="44" y="78">OM / REF / DARK + ROI labels</text>
+      <text x="382" y="78">Optical features → nested ML</text>
+      <text x="720" y="78">Held-out thickness → paired SC</text>
+      <text x="44" y="203">Planar growth + viscosity</text>
+      <text x="382" y="203">Reaction–diffusion physics</text>
+      <text x="720" y="203">Fixed-theory SC comparison</text>
+      <text x="44" y="328">Supplied uncertainty assumptions</text>
+      <text x="382" y="328">Monte Carlo propagation</text>
+      <text x="720" y="328">SC / AR uncertainty summaries</text>
+    </g>
+    <g font-size="13" fill="#4e6373">
+      <text x="44" y="101">Registered windows, scale, matched regions</text>
+      <text x="44" y="122">Synthetic TIFFs and labels in this example</text>
+      <text x="382" y="101">REF/DARK → OD and texture features</text>
+      <text x="382" y="122">Condition splits; inner RF / KRR / SVR selection</text>
+      <text x="720" y="101">Cross-fitted evaluation; SC = bottom / top</text>
+      <text x="720" y="122">Final all-label model is fitted separately</text>
+      <text x="44" y="226">Geometry, material and diffusion reference</text>
+      <text x="44" y="247">Independent inputs for k and D calibration</text>
+      <text x="382" y="226">Steady 1-D transport; reactive end boundary</text>
+      <text x="382" y="247">Observation windows; model-based AR limit</text>
+      <text x="720" y="226">Same observation support for both paths</text>
+      <text x="720" y="247">Shared synthetic physics ≠ experimental proof</text>
+      <text x="44" y="352">Means, log covariance, measurement errors</text>
+      <text x="382" y="352">Separate from ML model-selection uncertainty</text>
+      <text x="720" y="352">Conditional on supplied input distributions</text>
+    </g>
+    <text x="28" y="401" font-size="12" fill="#536678">Research prototype · source-guided reimplementation · synthetic software validation only · real OM / FE-SEM validation not run</text>
+  </g>
+</svg>

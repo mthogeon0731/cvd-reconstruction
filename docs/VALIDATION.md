@@ -1,4 +1,31 @@
-# Publication validation — 2026-10-07
+# Validation records
+
+## Portfolio refresh — 2026-10-07
+
+This is the latest pre-push verification for the README, figures and approved MIT metadata update. Production modules and the 360 product tests are unchanged from baseline commit `1b8dc7f22232736e9d88612767f1e919d616934f`; version remains 0.2.2. [Exact new commands, durations and source/test hashes](validation_portfolio.json).
+
+| New check | Actual result |
+|---|---|
+| Clean file-only copy and new environment | PASS; no old archives/fixtures, no system site packages |
+| Public-index install of 26 build/runtime pins, no pip cache | PASS |
+| Regular wheel install, pip check, isolated import outside checkout | PASS; version 0.2.2, SPDX MIT and exact LICENSE installed |
+| Minimal example | PASS; synthetic SC = 0.8732713697525131 |
+| Product tests | **360 collected / 360 passed; 0 failed, errors or skipped** |
+| Separate synthetic input generation/validation | PASS |
+| Full synthetic study and verification | PASS_SOFTWARE_PIPELINE / PASS_SOFTWARE_ONLY |
+| Figure reproduction | Initial new run and clean-copy new run yield identical plotted source/summary/PNG hashes; repeated rendering of one run is also byte-identical |
+| English/Korean README | GitHub Markdown API render, browser preview and image loading checked; local file/heading links checked separately before commit |
+| Package/test integrity | Production modules, configurations, pins and product test files unchanged |
+
+Environment: Windows 11 build 26200 AMD64 / bundled CPython 3.12.14. The [reproduction controls](REPRODUCIBILITY.md#controlled-environment) apply. Figure equality covers only the plotted inputs and summary/PNG in this environment, not every output file or another OS. The browser had no GitHub sign-in: the visual check used GitHub-rendered HTML and local assets with approximate GitHub CSS. The actual hosted private-page appearance was not visually confirmed.
+
+The updated Quickstart installation, minimal example, full study, output verifier, figure renderer and product test commands were executed. The full 14-stage CLI replay, separate 14-case smoke check, external audits, other OS/Python combinations, GitHub Actions and real OM/FE-SEM validation were **not rerun** for this refresh. Earlier results below remain a separate record. Post-push fresh-clone installation, minimal example and product tests are reported to the owner with the final remote commit; they are not claimed in advance by this pre-push file.
+
+The exact source files and new image metadata were reviewed for credentials, private paths, internal URLs and unintended personal details. The only binary asset is the small synthetic PNG; its metadata contains the public generator name and resolution, no EXIF. The sole email-pattern code match is matrix multiplication, manually classified as a false positive. Existing approved Git identity is retained. Rights rely on the owner's representation and explicit MIT approval; no independent patent/contract clearance or exhaustive secret-detection guarantee is asserted. [Rights and scope](RIGHTS.md), [presentation references](PORTFOLIO_REVIEW.md).
+
+---
+
+## Initial publication preparation — earlier 2026-10-07 run
 
 This report is for the 0.2.2 publication copy. The pre-push clean-copy verification below completed successfully. The remote fresh-clone result is delivered separately with the exact commit SHA after pushing; it is not pre-claimed by this pre-push report. Historical counts are in [external audits](EXTERNAL_AUDITS.md).
 
@@ -9,7 +36,7 @@ The source is copied using an explicit file allowlist into an otherwise empty va
 Initial restricted-network dependency installation could not connect. It was retried with network access using the same pins. A first local wheel build could not access the user pip cache; `--no-cache-dir` resolved this environment restriction. These are recorded setup failures, not suppressed product test failures. The original logs remain locally preserved.
 
 
-## Completed pre-push results
+### Earlier completed pre-push results
 
 | Check | Result |
 |---|---|

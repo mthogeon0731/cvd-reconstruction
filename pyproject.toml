@@ -1,17 +1,24 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "cvd-cbd-reference-rebuild"
 version = "0.2.2"
-description = "Source-guided, explicitly uncalibrated CBD reaction-diffusion surrogate reconstruction"
+description = "Synthetic study of trench coating: reaction-diffusion physics, optical metrology and condition-level ML"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.26,<3", "scipy>=1.11,<2", "pandas>=2.1,<3", "scikit-learn>=1.4,<2", "matplotlib>=3.8,<4", "joblib>=1.3,<2", "Pillow>=10,<13"]
 
 [project.scripts]
 cvd-cbd = "cvd_cbd.cli:main"
 cvd-study = "cvd_cbd.study_cli:main"
+
+[project.urls]
+Repository = "https://github.com/mthogeon0731/cvd-reconstruction"
+Documentation = "https://github.com/mthogeon0731/cvd-reconstruction/tree/main/docs"
 
 [tool.setuptools.packages.find]
 include = ["cvd_cbd*"]
