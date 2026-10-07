@@ -1,0 +1,13 @@
+# Public provenance and file scope
+
+The selected source is the 2026-10-07 duplicate-JSON-key follow-up, after the six-finding remediation. Its seven product-module changes relative to the preceding source are `config.py`, `json_utils.py`, `modeling.py`, `similitude.py`, `study_cli.py`, `study_config.py` and `workflow.py`. The source folder has no Git history. This repository starts a new reviewed history; previous local artifacts and source bytes remain separately preserved.
+
+The underlying scaffold and specification describe a reimplementation from research descriptions. Original laboratory software was not available. This repository does not reproduce or distribute private source narratives, application documents, original prompt text or laboratory evidence.
+
+Included: Python modules, all product test functions, configuration templates, header-only CSV schemas, runtime/build pins, generation code, selected verification utilities and newly written public documentation. Test assertions are preserved while historical-output setup in the JSON regressions is replaced by freshly generated temporary data. The synthetic generator was read: it creates arrays from explicit formulas and a seeded RNG, with no external image/data reads. No binary fixture is shipped. The header-only templates contain no measured rows.
+
+Excluded: virtual environments, wheelhouse, caches, build metadata, full audit ZIPs, historical logs/provenance, all existing input/output CSVs and images, pretrained models, original research descriptions and the separate audit suites that require retained private-layout fixtures. Those audit suites and their failing history are described in [external audits](EXTERNAL_AUDITS.md); no claim of running them as product tests is made.
+
+The publication review checks the explicit file list and every outgoing Git blob, commit message, author/committer identity and tracked path. It searches for credential formats, private keys, sensitive assignments, user paths, internal URLs and personal contact data. Candidate matches are reviewed without reproducing secret values in reports. All shipped files are UTF-8 text; there are no image/document containers with EXIF or author metadata. Runtime provenance can contain absolute paths for locally generated outputs, which are excluded from Git; inspect those outputs before any later sharing.
+
+Pattern searches and manual review cannot prove the absence of every possible secret or establish legal ownership independently. The owner's rights confirmation and the dependency-license review are recorded in [rights](RIGHTS.md). Current execution results belong in [validation](VALIDATION.md), not in historical claims.

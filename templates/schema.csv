@@ -1,0 +1,112 @@
+table,field,required,unit,description
+runs.csv,run_id,yes,identifier/string,R01 etc; matches file R field
+runs.csv,T_C,yes,degree C,Finite physical value; see README and rebuild_spec
+runs.csv,gly_pct,yes,percent in gly_basis,Finite physical value; see README and rebuild_spec
+runs.csv,gly_basis,yes,see description,mass_pct or volume_pct; no implicit conversion
+runs.csv,rep,yes,see description,"run replicate within condition, not a tile repeat"
+runs.csv,date,yes,see description,ISO YYYY-MM-DD
+runs.csv,session_id,yes,identifier/string,fixed acquisition session identity
+runs.csv,cycles,yes,see description,positive deposition cycle count
+runs.csv,dep_time_h,yes,h,Finite physical value; see README and rebuild_spec
+runs.csv,batch_id,yes,identifier/string,physical deposition batch; crossing conditions blocks condition LOGO
+layout.csv,slot,yes,see description,"T field in filename; slot, not temperature"
+layout.csv,AR,yes,L/w,Finite physical value; see README and rebuild_spec
+layout.csv,L_um,yes,um,Finite physical value; see README and rebuild_spec
+layout.csv,w_um,yes,um,Finite physical value; see README and rebuild_spec
+layout.csv,h_um,yes,um,Finite physical value; see README and rebuild_spec
+layout.csv,faces,yes,see description,2 (left/right) or 4 (plus floor/ceiling)
+layout.csv,left_material,yes,see description,glass/pdms/inert material at this side
+layout.csv,right_material,yes,see description,glass/pdms/inert material at this side
+layout.csv,floor_material,yes,see description,glass/pdms/inert material at this side
+layout.csv,ceiling_material,yes,see description,glass/pdms/inert material at this side
+viscosity.csv,T_C,yes,degree C,Finite physical value; see README and rebuild_spec
+viscosity.csv,gly_pct,yes,percent in gly_basis,Finite physical value; see README and rebuild_spec
+viscosity.csv,eta_Pa_s,yes,Pa s,Finite physical value; see README and rebuild_spec
+viscosity.csv,eta_sd_Pa_s,yes,Pa s (1 SD),Finite nonnegative uncertainty
+viscosity.csv,eta_unit,yes,see description,Pa_s only; convert mPa s explicitly
+viscosity.csv,gly_basis,yes,see description,mass_pct or volume_pct; no implicit conversion
+viscosity.csv,source,yes,see description,measurement record/source; do not invent
+viscosity.csv,origin,yes,see description,SYNTHETIC or REAL; mixed origins prohibited
+calibration_thickness.csv,T_C,yes,degree C,Finite physical value; see README and rebuild_spec
+calibration_thickness.csv,gly_pct,yes,percent in gly_basis,Finite physical value; see README and rebuild_spec
+calibration_thickness.csv,substrate,yes,see description,glass or pdms
+calibration_thickness.csv,t_min,yes,min,Finite physical value; see README and rebuild_spec
+calibration_thickness.csv,thickness_nm,yes,nm,Finite physical value; see README and rebuild_spec
+calibration_thickness.csv,thickness_sd_nm,optional,nm (1 SD),"Finite nonnegative supplied 1 SD. FESEM required. Planar column may be absent (residual-only SE), but present missing/NaN/Inf/negative values are errors; explicit zero is distinct."
+calibration_thickness.csv,method,yes,see description,actual independent measurement method
+calibration_thickness.csv,measurement_id,yes,identifier/string,"independent FE-SEM/planar metrology ID, not tile ID"
+calibration_thickness.csv,specimen_id,yes,identifier/string,physical specimen; rephotographs retain ID
+calibration_thickness.csv,C0_mol_m3,optional,mol/m3,Finite physical value; see README and rebuild_spec
+calibration_thickness.csv,source,yes,see description,measurement record/source; do not invent
+calibration_thickness.csv,origin,yes,see description,SYNTHETIC or REAL; mixed origins prohibited
+fesem.csv,run_id,yes,identifier/string,R01 etc; matches file R field
+fesem.csv,chip,yes,see description,chip number within run
+fesem.csv,slot,yes,see description,"T field in filename; slot, not temperature"
+fesem.csv,pos,yes,see description,top or bot for trenches; flat for planar images
+fesem.csv,thickness_nm,yes,nm,Finite physical value; see README and rebuild_spec
+fesem.csv,thickness_sd_nm,yes,nm (1 SD),"Finite nonnegative supplied 1 SD. FESEM required. Planar column may be absent (residual-only SE), but present missing/NaN/Inf/negative values are errors; explicit zero is distinct."
+fesem.csv,n_sites,yes,see description,actual spatial sites contributing to the registered ROI mean
+fesem.csv,sem_file,yes,see description,data-root-relative actual SEM evidence file; synthetic evidence explicitly marked
+fesem.csv,measurement_id,yes,identifier/string,"independent FE-SEM/planar metrology ID, not tile ID"
+fesem.csv,matched_region_id,yes,identifier/string,registered optical region; unique per row
+fesem.csv,z_lo_um,yes,um from inlet,Finite physical value; see README and rebuild_spec
+fesem.csv,z_hi_um,yes,um from inlet,Finite physical value; see README and rebuild_spec
+fesem.csv,match_basis,yes,see description,validated_region_average; FESEM support must equal tile support
+fesem.csv,source,yes,see description,measurement record/source; do not invent
+manual_om.csv,image_id,yes,identifier/string,"unique filename-safe image identity, retained through predictions"
+manual_om.csv,measurement_id,yes,identifier/string,"independent FE-SEM/planar metrology ID, not tile ID"
+manual_om.csv,thickness_nm_manual,yes,nm,Finite physical value; see README and rebuild_spec
+manual_om.csv,method,yes,see description,actual independent measurement method
+manual_om.csv,source,yes,see description,measurement record/source; do not invent
+frames.csv,frame_id,yes,identifier/string,unique REF/DARK frame identity
+frames.csv,path,yes,see description,"data-root-relative image path, no .. or absolute paths"
+frames.csv,kind,yes,see description,trench/flat in images; REF/DARK in frames
+frames.csv,session_id,yes,identifier/string,fixed acquisition session identity
+frames.csv,exposure_ms,yes,ms,Finite physical value; see README and rebuild_spec
+frames.csv,gain,yes,camera gain multiplier,Finite physical value; see README and rebuild_spec
+frames.csv,illumination_id,yes,identifier/string,"same illumination configuration across image, REF, DARK"
+frames.csv,magnification,yes,objective magnification,Finite physical value; see README and rebuild_spec
+frames.csv,bit_depth,yes,effective camera bits,Finite physical value; see README and rebuild_spec
+frames.csv,auto_exposure,yes,see description,false or 0 only
+frames.csv,gamma,yes,linear gamma=1,Finite physical value; see README and rebuild_spec
+frames.csv,white_balance,yes,see description,fixed only
+frames.csv,color_channel,yes,see description,"mono/red/green/blue; explicit channel, no implicit RGB averaging"
+images.csv,image_id,yes,identifier/string,"unique filename-safe image identity, retained through predictions"
+images.csv,path,yes,see description,"data-root-relative image path, no .. or absolute paths"
+images.csv,kind,yes,see description,trench/flat in images; REF/DARK in frames
+images.csv,run_id,conditional,identifier/string,R01 etc; matches file R field
+images.csv,chip,conditional,see description,chip number within run
+images.csv,slot,conditional,see description,"T field in filename; slot, not temperature"
+images.csv,pos,conditional,see description,top or bot for trenches; flat for planar images
+images.csv,condition_id,yes,identifier/string,{T:g}C_G{gly:g}_{gly_basis}; all repeats share condition
+images.csv,batch_id,yes,identifier/string,physical deposition batch; crossing conditions blocks condition LOGO
+images.csv,specimen_id,yes,identifier/string,physical specimen; rephotographs retain ID
+images.csv,matched_region_id,yes,identifier/string,registered optical region; unique per row
+images.csv,measurement_id,conditional,identifier/string,"independent FE-SEM/planar metrology ID, not tile ID"
+images.csv,z_anchor_um,conditional,um from inlet,Finite physical value; see README and rebuild_spec
+images.csv,x_anchor_px,conditional,see description,canonical image pixel-edge coordinate matching z_anchor_um; not assumed image center
+images.csv,um_per_px,yes,um/pixel,"Finite strictly positive isotropic um/pixel scalar; decimal/scientific numeric strings supported; bool, unit suffix, nonfinite and axis-specific calibration rejected"
+images.csv,scale_source,yes,see description,REAL: stage_micrometer/calibration_record; SYNTHETIC: SYNTHETIC. Nominal channel width prohibited
+images.csv,scale_record,yes,see description,"Relative evidence file supporting um_per_px; byte SHA256 recorded, not authenticated"
+images.csv,orientation,yes,see description,x+/x-/y+/y-; reorient to increasing z along canonical x
+images.csv,roi_mode,yes,see description,auto or manual; failed auto requires supplied manual channel ROI
+images.csv,roi_x0,conditional,see description,manual canonical left pixel edge (inclusive)
+images.csv,roi_x1,conditional,see description,manual canonical right edge (exclusive)
+images.csv,roi_y0,conditional,see description,manual canonical channel top boundary or planar ROI top
+images.csv,roi_y1,conditional,see description,manual canonical channel bottom boundary or planar ROI bottom; wall margin applied inside
+images.csv,mask_path,optional,see description,optional relative full image binary mask; canonicalized with image; only full valid tiles used
+images.csv,ref_id,yes,identifier/string,Actually used REF registry ID; correction file byte SHA256 recorded and rechecked
+images.csv,dark_id,yes,identifier/string,Actually used DARK registry ID; mandatory; correction file byte SHA256 recorded and rechecked
+images.csv,origin,yes,see description,SYNTHETIC or REAL; mixed origins prohibited
+images.csv,session_id,yes,identifier/string,fixed acquisition session identity
+images.csv,exposure_ms,yes,ms,Finite physical value; see README and rebuild_spec
+images.csv,gain,yes,camera gain multiplier,Finite physical value; see README and rebuild_spec
+images.csv,illumination_id,yes,identifier/string,"same illumination configuration across image, REF, DARK"
+images.csv,magnification,yes,objective magnification,Finite physical value; see README and rebuild_spec
+images.csv,bit_depth,yes,effective camera bits,Finite physical value; see README and rebuild_spec
+images.csv,auto_exposure,yes,see description,false or 0 only
+images.csv,gamma,yes,linear gamma=1,Finite physical value; see README and rebuild_spec
+images.csv,white_balance,yes,see description,fixed only
+images.csv,color_channel,yes,see description,"mono/red/green/blue; explicit channel, no implicit RGB averaging"
+images.csv,include,optional,see description,optional true/false; default include all
+images.csv,exclusion_reason,optional,see description,required when include=false; preserved in excluded_images.json

@@ -1,0 +1,34 @@
+"""Generate empty input templates and machine-readable field reference."""
+from pathlib import Path
+import csv,json
+from cvd_cbd.manifest import SCHEMAS
+root=Path(__file__).resolve().parents[1]
+units={'T_C':'degree C','gly_pct':'percent in gly_basis','eta_Pa_s':'Pa s','eta_sd_Pa_s':'Pa s (1 SD)','t_min':'min','thickness_nm':'nm','thickness_sd_nm':'nm (1 SD)','thickness_nm_manual':'nm','dep_time_h':'h','C0_mol_m3':'mol/m3','L_um':'um','w_um':'um','h_um':'um','AR':'L/w','um_per_px':'um/pixel','z_anchor_um':'um from inlet','z_lo_um':'um from inlet','z_hi_um':'um from inlet','exposure_ms':'ms','gain':'camera gain multiplier','magnification':'objective magnification','bit_depth':'effective camera bits','gamma':'linear gamma=1'}
+desc={
+'run_id':'R01 etc; matches file R field', 'chip':'chip number within run', 'slot':'T field in filename; slot, not temperature',
+'pos':'top or bot for trenches; flat for planar images','kind':'trench/flat in images; REF/DARK in frames','condition_id':'{T:g}C_G{gly:g}_{gly_basis}; all repeats share condition',
+'batch_id':'physical deposition batch; crossing conditions blocks condition LOGO','specimen_id':'physical specimen; rephotographs retain ID','measurement_id':'independent FE-SEM/planar metrology ID, not tile ID','matched_region_id':'registered optical region; unique per row',
+'image_id':'unique filename-safe image identity, retained through predictions','frame_id':'unique REF/DARK frame identity','session_id':'fixed acquisition session identity','path':'data-root-relative image path, no .. or absolute paths','sem_file':'data-root-relative actual SEM evidence file; synthetic evidence explicitly marked',
+'scale_source':'REAL: stage_micrometer/calibration_record; SYNTHETIC: SYNTHETIC. Nominal channel width prohibited','scale_record':'relative evidence file supporting um_per_px; software checks presence, not authenticity',
+'orientation':'x+/x-/y+/y-; reorient to increasing z along canonical x','x_anchor_px':'canonical image pixel-edge coordinate matching z_anchor_um; not assumed image center','roi_mode':'auto or manual; failed auto requires supplied manual channel ROI',
+'roi_x0':'manual canonical left pixel edge (inclusive)','roi_x1':'manual canonical right edge (exclusive)','roi_y0':'manual canonical channel top boundary or planar ROI top','roi_y1':'manual canonical channel bottom boundary or planar ROI bottom; wall margin applied inside',
+'mask_path':'optional relative full image binary mask; canonicalized with image; only full valid tiles used','ref_id':'matching REF frame registry ID','dark_id':'matching DARK frame registry ID; mandatory','origin':'SYNTHETIC or REAL; mixed origins prohibited',
+'auto_exposure':'false or 0 only','white_balance':'fixed only','color_channel':'mono/red/green/blue; explicit channel, no implicit RGB averaging','illumination_id':'same illumination configuration across image, REF, DARK','gly_basis':'mass_pct or volume_pct; no implicit conversion','eta_unit':'Pa_s only; convert mPa s explicitly','method':'actual independent measurement method','source':'measurement record/source; do not invent','match_basis':'validated_region_average; FESEM support must equal tile support','n_sites':'actual spatial sites contributing to the registered ROI mean','rep':'run replicate within condition, not a tile repeat','date':'ISO YYYY-MM-DD','cycles':'positive deposition cycle count','faces':'2 (left/right) or 4 (plus floor/ceiling)','substrate':'glass or pdms',
+'include':'optional true/false; default include all','exclusion_reason':'required when include=false; preserved in excluded_images.json',
+}
+rows=[]
+desc.update(um_per_px='Finite strictly positive isotropic um/pixel scalar; decimal/scientific numeric strings supported; bool, unit suffix, nonfinite and axis-specific calibration rejected',
+    thickness_sd_nm='Finite nonnegative supplied 1 SD. FESEM required. Planar column may be absent (residual-only SE), but present missing/NaN/Inf/negative values are errors; explicit zero is distinct.',
+    scale_record='Relative evidence file supporting um_per_px; byte SHA256 recorded, not authenticated',
+    ref_id='Actually used REF registry ID; correction file byte SHA256 recorded and rechecked',
+    dark_id='Actually used DARK registry ID; mandatory; correction file byte SHA256 recorded and rechecked')
+for name,cols in SCHEMAS.items():
+    cols=list(cols)+(['include','exclusion_reason'] if name=='images' else [])
+    with (root/'templates'/f'{name}.csv').open('w',newline='') as f:csv.writer(f).writerow(cols)
+    for field in cols:
+        optional=(field in ['mask_path','include','exclusion_reason','thickness_sd_nm','C0_mol_m3'] and name=='calibration_thickness') or (name=='images' and field in ['mask_path','include','exclusion_reason'])
+        conditional=(name=='images' and field in ['run_id','chip','slot','pos','measurement_id','z_anchor_um','x_anchor_px','roi_x0','roi_x1','roi_y0','roi_y1'])
+        rows.append(dict(table=name+'.csv',field=field,required='conditional' if conditional else ('optional' if optional else 'yes'),unit=units.get(field,'identifier/string' if field.endswith('_id') else 'see description'),description=desc.get(field, 'glass/pdms/inert material at this side' if field.endswith('_material') else ('Finite nonnegative uncertainty' if '_sd_' in field else 'Finite physical value; see README and rebuild_spec'))))
+with (root/'templates/schema.csv').open('w',newline='') as f:
+    w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+(root/'templates/schema.json').write_text(json.dumps({'format':'CSV UTF-8 (optional BOM), comma delimiter, quoted headers supported','schema_version':'0.2.2','paths':'relative to supplied data root','tables':SCHEMAS,'fields':rows,'contracts_document':'docs/INPUT_CONTRACTS.md','conditional_rules':['Header names are case-sensitive, stripped of surrounding whitespace; blank or duplicate normalized names fail before pandas parsing','Direct DataFrames require unique canonical string column names','images flat rows may leave trench geometry/position IDs blank','images measurement_id blank only for unlabeled inference; labeled rows join fesem','manual ROI coordinates required in manual mode','calibration repeated time points require distinct measurement IDs; repeated specimens use cluster covariance','all columns listed in table templates must be present unless explicitly optional','An absent optional planar SD column means residual-only SE, not zero metrology uncertainty; a present column must have all finite nonnegative values','Uncertainty means require active reaction materials only; compact covariance must name every supplied mean exactly once; inactive parameters are NOT_APPLICABLE','empty header-only tables contain no experimental observations']},ensure_ascii=False,indent=2),encoding='utf-8')

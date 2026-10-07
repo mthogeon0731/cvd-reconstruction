@@ -1,0 +1,924 @@
+{
+  "format": "CSV UTF-8 (optional BOM), comma delimiter, quoted headers supported",
+  "schema_version": "0.2.2",
+  "paths": "relative to supplied data root",
+  "tables": {
+    "runs": [
+      "run_id",
+      "T_C",
+      "gly_pct",
+      "gly_basis",
+      "rep",
+      "date",
+      "session_id",
+      "cycles",
+      "dep_time_h",
+      "batch_id"
+    ],
+    "layout": [
+      "slot",
+      "AR",
+      "L_um",
+      "w_um",
+      "h_um",
+      "faces",
+      "left_material",
+      "right_material",
+      "floor_material",
+      "ceiling_material"
+    ],
+    "viscosity": [
+      "T_C",
+      "gly_pct",
+      "eta_Pa_s",
+      "eta_sd_Pa_s",
+      "eta_unit",
+      "gly_basis",
+      "source",
+      "origin"
+    ],
+    "calibration_thickness": [
+      "T_C",
+      "gly_pct",
+      "substrate",
+      "t_min",
+      "thickness_nm",
+      "thickness_sd_nm",
+      "method",
+      "measurement_id",
+      "specimen_id",
+      "C0_mol_m3",
+      "source",
+      "origin"
+    ],
+    "fesem": [
+      "run_id",
+      "chip",
+      "slot",
+      "pos",
+      "thickness_nm",
+      "thickness_sd_nm",
+      "n_sites",
+      "sem_file",
+      "measurement_id",
+      "matched_region_id",
+      "z_lo_um",
+      "z_hi_um",
+      "match_basis",
+      "source"
+    ],
+    "manual_om": [
+      "image_id",
+      "measurement_id",
+      "thickness_nm_manual",
+      "method",
+      "source"
+    ],
+    "frames": [
+      "frame_id",
+      "path",
+      "kind",
+      "session_id",
+      "exposure_ms",
+      "gain",
+      "illumination_id",
+      "magnification",
+      "bit_depth",
+      "auto_exposure",
+      "gamma",
+      "white_balance",
+      "color_channel"
+    ],
+    "images": [
+      "image_id",
+      "path",
+      "kind",
+      "run_id",
+      "chip",
+      "slot",
+      "pos",
+      "condition_id",
+      "batch_id",
+      "specimen_id",
+      "matched_region_id",
+      "measurement_id",
+      "z_anchor_um",
+      "x_anchor_px",
+      "um_per_px",
+      "scale_source",
+      "scale_record",
+      "orientation",
+      "roi_mode",
+      "roi_x0",
+      "roi_x1",
+      "roi_y0",
+      "roi_y1",
+      "mask_path",
+      "ref_id",
+      "dark_id",
+      "origin",
+      "session_id",
+      "exposure_ms",
+      "gain",
+      "illumination_id",
+      "magnification",
+      "bit_depth",
+      "auto_exposure",
+      "gamma",
+      "white_balance",
+      "color_channel"
+    ]
+  },
+  "fields": [
+    {
+      "table": "runs.csv",
+      "field": "run_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "R01 etc; matches file R field"
+    },
+    {
+      "table": "runs.csv",
+      "field": "T_C",
+      "required": "yes",
+      "unit": "degree C",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "runs.csv",
+      "field": "gly_pct",
+      "required": "yes",
+      "unit": "percent in gly_basis",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "runs.csv",
+      "field": "gly_basis",
+      "required": "yes",
+      "unit": "see description",
+      "description": "mass_pct or volume_pct; no implicit conversion"
+    },
+    {
+      "table": "runs.csv",
+      "field": "rep",
+      "required": "yes",
+      "unit": "see description",
+      "description": "run replicate within condition, not a tile repeat"
+    },
+    {
+      "table": "runs.csv",
+      "field": "date",
+      "required": "yes",
+      "unit": "see description",
+      "description": "ISO YYYY-MM-DD"
+    },
+    {
+      "table": "runs.csv",
+      "field": "session_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "fixed acquisition session identity"
+    },
+    {
+      "table": "runs.csv",
+      "field": "cycles",
+      "required": "yes",
+      "unit": "see description",
+      "description": "positive deposition cycle count"
+    },
+    {
+      "table": "runs.csv",
+      "field": "dep_time_h",
+      "required": "yes",
+      "unit": "h",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "runs.csv",
+      "field": "batch_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "physical deposition batch; crossing conditions blocks condition LOGO"
+    },
+    {
+      "table": "layout.csv",
+      "field": "slot",
+      "required": "yes",
+      "unit": "see description",
+      "description": "T field in filename; slot, not temperature"
+    },
+    {
+      "table": "layout.csv",
+      "field": "AR",
+      "required": "yes",
+      "unit": "L/w",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "layout.csv",
+      "field": "L_um",
+      "required": "yes",
+      "unit": "um",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "layout.csv",
+      "field": "w_um",
+      "required": "yes",
+      "unit": "um",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "layout.csv",
+      "field": "h_um",
+      "required": "yes",
+      "unit": "um",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "layout.csv",
+      "field": "faces",
+      "required": "yes",
+      "unit": "see description",
+      "description": "2 (left/right) or 4 (plus floor/ceiling)"
+    },
+    {
+      "table": "layout.csv",
+      "field": "left_material",
+      "required": "yes",
+      "unit": "see description",
+      "description": "glass/pdms/inert material at this side"
+    },
+    {
+      "table": "layout.csv",
+      "field": "right_material",
+      "required": "yes",
+      "unit": "see description",
+      "description": "glass/pdms/inert material at this side"
+    },
+    {
+      "table": "layout.csv",
+      "field": "floor_material",
+      "required": "yes",
+      "unit": "see description",
+      "description": "glass/pdms/inert material at this side"
+    },
+    {
+      "table": "layout.csv",
+      "field": "ceiling_material",
+      "required": "yes",
+      "unit": "see description",
+      "description": "glass/pdms/inert material at this side"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "T_C",
+      "required": "yes",
+      "unit": "degree C",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "gly_pct",
+      "required": "yes",
+      "unit": "percent in gly_basis",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "eta_Pa_s",
+      "required": "yes",
+      "unit": "Pa s",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "eta_sd_Pa_s",
+      "required": "yes",
+      "unit": "Pa s (1 SD)",
+      "description": "Finite nonnegative uncertainty"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "eta_unit",
+      "required": "yes",
+      "unit": "see description",
+      "description": "Pa_s only; convert mPa s explicitly"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "gly_basis",
+      "required": "yes",
+      "unit": "see description",
+      "description": "mass_pct or volume_pct; no implicit conversion"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "source",
+      "required": "yes",
+      "unit": "see description",
+      "description": "measurement record/source; do not invent"
+    },
+    {
+      "table": "viscosity.csv",
+      "field": "origin",
+      "required": "yes",
+      "unit": "see description",
+      "description": "SYNTHETIC or REAL; mixed origins prohibited"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "T_C",
+      "required": "yes",
+      "unit": "degree C",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "gly_pct",
+      "required": "yes",
+      "unit": "percent in gly_basis",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "substrate",
+      "required": "yes",
+      "unit": "see description",
+      "description": "glass or pdms"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "t_min",
+      "required": "yes",
+      "unit": "min",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "thickness_nm",
+      "required": "yes",
+      "unit": "nm",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "thickness_sd_nm",
+      "required": "optional",
+      "unit": "nm (1 SD)",
+      "description": "Finite nonnegative supplied 1 SD. FESEM required. Planar column may be absent (residual-only SE), but present missing/NaN/Inf/negative values are errors; explicit zero is distinct."
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "method",
+      "required": "yes",
+      "unit": "see description",
+      "description": "actual independent measurement method"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "measurement_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "independent FE-SEM/planar metrology ID, not tile ID"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "specimen_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "physical specimen; rephotographs retain ID"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "C0_mol_m3",
+      "required": "optional",
+      "unit": "mol/m3",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "source",
+      "required": "yes",
+      "unit": "see description",
+      "description": "measurement record/source; do not invent"
+    },
+    {
+      "table": "calibration_thickness.csv",
+      "field": "origin",
+      "required": "yes",
+      "unit": "see description",
+      "description": "SYNTHETIC or REAL; mixed origins prohibited"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "run_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "R01 etc; matches file R field"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "chip",
+      "required": "yes",
+      "unit": "see description",
+      "description": "chip number within run"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "slot",
+      "required": "yes",
+      "unit": "see description",
+      "description": "T field in filename; slot, not temperature"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "pos",
+      "required": "yes",
+      "unit": "see description",
+      "description": "top or bot for trenches; flat for planar images"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "thickness_nm",
+      "required": "yes",
+      "unit": "nm",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "thickness_sd_nm",
+      "required": "yes",
+      "unit": "nm (1 SD)",
+      "description": "Finite nonnegative supplied 1 SD. FESEM required. Planar column may be absent (residual-only SE), but present missing/NaN/Inf/negative values are errors; explicit zero is distinct."
+    },
+    {
+      "table": "fesem.csv",
+      "field": "n_sites",
+      "required": "yes",
+      "unit": "see description",
+      "description": "actual spatial sites contributing to the registered ROI mean"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "sem_file",
+      "required": "yes",
+      "unit": "see description",
+      "description": "data-root-relative actual SEM evidence file; synthetic evidence explicitly marked"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "measurement_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "independent FE-SEM/planar metrology ID, not tile ID"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "matched_region_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "registered optical region; unique per row"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "z_lo_um",
+      "required": "yes",
+      "unit": "um from inlet",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "z_hi_um",
+      "required": "yes",
+      "unit": "um from inlet",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "match_basis",
+      "required": "yes",
+      "unit": "see description",
+      "description": "validated_region_average; FESEM support must equal tile support"
+    },
+    {
+      "table": "fesem.csv",
+      "field": "source",
+      "required": "yes",
+      "unit": "see description",
+      "description": "measurement record/source; do not invent"
+    },
+    {
+      "table": "manual_om.csv",
+      "field": "image_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "unique filename-safe image identity, retained through predictions"
+    },
+    {
+      "table": "manual_om.csv",
+      "field": "measurement_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "independent FE-SEM/planar metrology ID, not tile ID"
+    },
+    {
+      "table": "manual_om.csv",
+      "field": "thickness_nm_manual",
+      "required": "yes",
+      "unit": "nm",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "manual_om.csv",
+      "field": "method",
+      "required": "yes",
+      "unit": "see description",
+      "description": "actual independent measurement method"
+    },
+    {
+      "table": "manual_om.csv",
+      "field": "source",
+      "required": "yes",
+      "unit": "see description",
+      "description": "measurement record/source; do not invent"
+    },
+    {
+      "table": "frames.csv",
+      "field": "frame_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "unique REF/DARK frame identity"
+    },
+    {
+      "table": "frames.csv",
+      "field": "path",
+      "required": "yes",
+      "unit": "see description",
+      "description": "data-root-relative image path, no .. or absolute paths"
+    },
+    {
+      "table": "frames.csv",
+      "field": "kind",
+      "required": "yes",
+      "unit": "see description",
+      "description": "trench/flat in images; REF/DARK in frames"
+    },
+    {
+      "table": "frames.csv",
+      "field": "session_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "fixed acquisition session identity"
+    },
+    {
+      "table": "frames.csv",
+      "field": "exposure_ms",
+      "required": "yes",
+      "unit": "ms",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "frames.csv",
+      "field": "gain",
+      "required": "yes",
+      "unit": "camera gain multiplier",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "frames.csv",
+      "field": "illumination_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "same illumination configuration across image, REF, DARK"
+    },
+    {
+      "table": "frames.csv",
+      "field": "magnification",
+      "required": "yes",
+      "unit": "objective magnification",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "frames.csv",
+      "field": "bit_depth",
+      "required": "yes",
+      "unit": "effective camera bits",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "frames.csv",
+      "field": "auto_exposure",
+      "required": "yes",
+      "unit": "see description",
+      "description": "false or 0 only"
+    },
+    {
+      "table": "frames.csv",
+      "field": "gamma",
+      "required": "yes",
+      "unit": "linear gamma=1",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "frames.csv",
+      "field": "white_balance",
+      "required": "yes",
+      "unit": "see description",
+      "description": "fixed only"
+    },
+    {
+      "table": "frames.csv",
+      "field": "color_channel",
+      "required": "yes",
+      "unit": "see description",
+      "description": "mono/red/green/blue; explicit channel, no implicit RGB averaging"
+    },
+    {
+      "table": "images.csv",
+      "field": "image_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "unique filename-safe image identity, retained through predictions"
+    },
+    {
+      "table": "images.csv",
+      "field": "path",
+      "required": "yes",
+      "unit": "see description",
+      "description": "data-root-relative image path, no .. or absolute paths"
+    },
+    {
+      "table": "images.csv",
+      "field": "kind",
+      "required": "yes",
+      "unit": "see description",
+      "description": "trench/flat in images; REF/DARK in frames"
+    },
+    {
+      "table": "images.csv",
+      "field": "run_id",
+      "required": "conditional",
+      "unit": "identifier/string",
+      "description": "R01 etc; matches file R field"
+    },
+    {
+      "table": "images.csv",
+      "field": "chip",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "chip number within run"
+    },
+    {
+      "table": "images.csv",
+      "field": "slot",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "T field in filename; slot, not temperature"
+    },
+    {
+      "table": "images.csv",
+      "field": "pos",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "top or bot for trenches; flat for planar images"
+    },
+    {
+      "table": "images.csv",
+      "field": "condition_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "{T:g}C_G{gly:g}_{gly_basis}; all repeats share condition"
+    },
+    {
+      "table": "images.csv",
+      "field": "batch_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "physical deposition batch; crossing conditions blocks condition LOGO"
+    },
+    {
+      "table": "images.csv",
+      "field": "specimen_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "physical specimen; rephotographs retain ID"
+    },
+    {
+      "table": "images.csv",
+      "field": "matched_region_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "registered optical region; unique per row"
+    },
+    {
+      "table": "images.csv",
+      "field": "measurement_id",
+      "required": "conditional",
+      "unit": "identifier/string",
+      "description": "independent FE-SEM/planar metrology ID, not tile ID"
+    },
+    {
+      "table": "images.csv",
+      "field": "z_anchor_um",
+      "required": "conditional",
+      "unit": "um from inlet",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "images.csv",
+      "field": "x_anchor_px",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "canonical image pixel-edge coordinate matching z_anchor_um; not assumed image center"
+    },
+    {
+      "table": "images.csv",
+      "field": "um_per_px",
+      "required": "yes",
+      "unit": "um/pixel",
+      "description": "Finite strictly positive isotropic um/pixel scalar; decimal/scientific numeric strings supported; bool, unit suffix, nonfinite and axis-specific calibration rejected"
+    },
+    {
+      "table": "images.csv",
+      "field": "scale_source",
+      "required": "yes",
+      "unit": "see description",
+      "description": "REAL: stage_micrometer/calibration_record; SYNTHETIC: SYNTHETIC. Nominal channel width prohibited"
+    },
+    {
+      "table": "images.csv",
+      "field": "scale_record",
+      "required": "yes",
+      "unit": "see description",
+      "description": "Relative evidence file supporting um_per_px; byte SHA256 recorded, not authenticated"
+    },
+    {
+      "table": "images.csv",
+      "field": "orientation",
+      "required": "yes",
+      "unit": "see description",
+      "description": "x+/x-/y+/y-; reorient to increasing z along canonical x"
+    },
+    {
+      "table": "images.csv",
+      "field": "roi_mode",
+      "required": "yes",
+      "unit": "see description",
+      "description": "auto or manual; failed auto requires supplied manual channel ROI"
+    },
+    {
+      "table": "images.csv",
+      "field": "roi_x0",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "manual canonical left pixel edge (inclusive)"
+    },
+    {
+      "table": "images.csv",
+      "field": "roi_x1",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "manual canonical right edge (exclusive)"
+    },
+    {
+      "table": "images.csv",
+      "field": "roi_y0",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "manual canonical channel top boundary or planar ROI top"
+    },
+    {
+      "table": "images.csv",
+      "field": "roi_y1",
+      "required": "conditional",
+      "unit": "see description",
+      "description": "manual canonical channel bottom boundary or planar ROI bottom; wall margin applied inside"
+    },
+    {
+      "table": "images.csv",
+      "field": "mask_path",
+      "required": "optional",
+      "unit": "see description",
+      "description": "optional relative full image binary mask; canonicalized with image; only full valid tiles used"
+    },
+    {
+      "table": "images.csv",
+      "field": "ref_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "Actually used REF registry ID; correction file byte SHA256 recorded and rechecked"
+    },
+    {
+      "table": "images.csv",
+      "field": "dark_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "Actually used DARK registry ID; mandatory; correction file byte SHA256 recorded and rechecked"
+    },
+    {
+      "table": "images.csv",
+      "field": "origin",
+      "required": "yes",
+      "unit": "see description",
+      "description": "SYNTHETIC or REAL; mixed origins prohibited"
+    },
+    {
+      "table": "images.csv",
+      "field": "session_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "fixed acquisition session identity"
+    },
+    {
+      "table": "images.csv",
+      "field": "exposure_ms",
+      "required": "yes",
+      "unit": "ms",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "images.csv",
+      "field": "gain",
+      "required": "yes",
+      "unit": "camera gain multiplier",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "images.csv",
+      "field": "illumination_id",
+      "required": "yes",
+      "unit": "identifier/string",
+      "description": "same illumination configuration across image, REF, DARK"
+    },
+    {
+      "table": "images.csv",
+      "field": "magnification",
+      "required": "yes",
+      "unit": "objective magnification",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "images.csv",
+      "field": "bit_depth",
+      "required": "yes",
+      "unit": "effective camera bits",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "images.csv",
+      "field": "auto_exposure",
+      "required": "yes",
+      "unit": "see description",
+      "description": "false or 0 only"
+    },
+    {
+      "table": "images.csv",
+      "field": "gamma",
+      "required": "yes",
+      "unit": "linear gamma=1",
+      "description": "Finite physical value; see README and rebuild_spec"
+    },
+    {
+      "table": "images.csv",
+      "field": "white_balance",
+      "required": "yes",
+      "unit": "see description",
+      "description": "fixed only"
+    },
+    {
+      "table": "images.csv",
+      "field": "color_channel",
+      "required": "yes",
+      "unit": "see description",
+      "description": "mono/red/green/blue; explicit channel, no implicit RGB averaging"
+    },
+    {
+      "table": "images.csv",
+      "field": "include",
+      "required": "optional",
+      "unit": "see description",
+      "description": "optional true/false; default include all"
+    },
+    {
+      "table": "images.csv",
+      "field": "exclusion_reason",
+      "required": "optional",
+      "unit": "see description",
+      "description": "required when include=false; preserved in excluded_images.json"
+    }
+  ],
+  "contracts_document": "docs/INPUT_CONTRACTS.md",
+  "conditional_rules": [
+    "Header names are case-sensitive, stripped of surrounding whitespace; blank or duplicate normalized names fail before pandas parsing",
+    "Direct DataFrames require unique canonical string column names",
+    "images flat rows may leave trench geometry/position IDs blank",
+    "images measurement_id blank only for unlabeled inference; labeled rows join fesem",
+    "manual ROI coordinates required in manual mode",
+    "calibration repeated time points require distinct measurement IDs; repeated specimens use cluster covariance",
+    "all columns listed in table templates must be present unless explicitly optional",
+    "An absent optional planar SD column means residual-only SE, not zero metrology uncertainty; a present column must have all finite nonnegative values",
+    "Uncertainty means require active reaction materials only; compact covariance must name every supplied mean exactly once; inactive parameters are NOT_APPLICABLE",
+    "empty header-only tables contain no experimental observations"
+  ]
+}

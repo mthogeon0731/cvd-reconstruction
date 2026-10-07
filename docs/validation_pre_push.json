@@ -1,0 +1,447 @@
+{
+  "date": "2026-10-07",
+  "timezone": "Asia/Seoul",
+  "phase": "pre-push clean copy",
+  "package_version": "0.2.2",
+  "environment": {
+    "python": "3.12.14",
+    "os": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "system_site_packages": false,
+    "pins_match": true
+  },
+  "product_test_counts": {
+    "tests": 360,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "installed_import_outside_checkout": "PASS",
+  "runtime_files_match_tested_copy": true,
+  "runtime_tree_sha256_lf": "8cbdb60273c90d17240f246ef574aece8bb4cfe9c3e77c5220100b4748a6e0cb",
+  "minimal_example": {
+    "origin": "SYNTHETIC",
+    "observable": "endpoint_concentration_ratio",
+    "SC": 0.8732713697525131,
+    "experimental_validation": "NOT RUN"
+  },
+  "demo_status": "PASS_SOFTWARE_PIPELINE",
+  "demo_verification_status": "PASS_SOFTWARE_ONLY",
+  "commands": [
+    {
+      "label": "install",
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "--isolated",
+        "install",
+        "--no-cache-dir",
+        "--no-index",
+        "--no-build-isolation",
+        "--no-deps",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 6.45
+    },
+    {
+      "label": "pip-check",
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 2.44
+    },
+    {
+      "label": "installed-import",
+      "command": [
+        "python",
+        "-I",
+        "-c",
+        "import cvd_cbd,importlib.metadata as m,pathlib,sys; p=pathlib.Path(cvd_cbd.__file__).resolve(); assert p.is_relative_to(pathlib.Path(sys.prefix).resolve()); assert cvd_cbd.__version__==m.version('cvd-cbd-reference-rebuild')=='0.2.2'; print(cvd_cbd.__version__,p)"
+      ],
+      "exit_code": 0,
+      "seconds": 0.36
+    },
+    {
+      "label": "minimal",
+      "command": [
+        "python",
+        "-I",
+        "<REPO>/examples/minimal.py"
+      ],
+      "exit_code": 0,
+      "seconds": 23.59
+    },
+    {
+      "label": "collect",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "exit_code": 0,
+      "seconds": 25.34
+    },
+    {
+      "label": "product-tests",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q",
+        "-ra",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "junit_family=xunit1",
+        "--junitxml=<LOGS>/product-tests.xml",
+        "--basetemp=<LOGS>/test-temp"
+      ],
+      "exit_code": 0,
+      "seconds": 379.36
+    },
+    {
+      "label": "generate",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "generate",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs"
+      ],
+      "exit_code": 0,
+      "seconds": 6.92
+    },
+    {
+      "label": "validate-inputs",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "validate",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs"
+      ],
+      "exit_code": 0,
+      "seconds": 10.8
+    },
+    {
+      "label": "demo",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "demo",
+        "--config",
+        "configs/synthetic_study.json",
+        "--out",
+        "outputs/demo"
+      ],
+      "exit_code": 0,
+      "seconds": 97.77
+    },
+    {
+      "label": "verify-demo",
+      "command": [
+        "python",
+        "verification/verify_run.py",
+        "--run",
+        "outputs/demo",
+        "--out",
+        "outputs/demo_verification.json"
+      ],
+      "exit_code": 0,
+      "seconds": 6.41
+    },
+    {
+      "label": "stage-01",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "validate",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs"
+      ],
+      "exit_code": 0,
+      "seconds": 8.28
+    },
+    {
+      "label": "stage-02",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "calibrate",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs",
+        "--out",
+        "outputs/replay/01"
+      ],
+      "exit_code": 0,
+      "seconds": 5.97
+    },
+    {
+      "label": "stage-03",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "design",
+        "--config",
+        "configs/synthetic_study.json",
+        "--calibration",
+        "outputs/replay/01/calibration.csv",
+        "--out",
+        "outputs/replay/00"
+      ],
+      "exit_code": 0,
+      "seconds": 7.17
+    },
+    {
+      "label": "stage-04",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "manifest",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs",
+        "--out",
+        "outputs/replay/02"
+      ],
+      "exit_code": 0,
+      "seconds": 9.48
+    },
+    {
+      "label": "stage-05",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "extract",
+        "--config",
+        "configs/synthetic_study.json",
+        "--root",
+        "outputs/generated_inputs",
+        "--manifest",
+        "outputs/replay/02/manifest.csv",
+        "--out",
+        "outputs/replay/03"
+      ],
+      "exit_code": 0,
+      "seconds": 74.41
+    },
+    {
+      "label": "stage-06",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "compare",
+        "--config",
+        "configs/synthetic_study.json",
+        "--features",
+        "outputs/replay/03/features.csv",
+        "--manual",
+        "outputs/generated_inputs/meta/manual_om.csv",
+        "--out",
+        "outputs/replay/04"
+      ],
+      "exit_code": 0,
+      "seconds": 17.7
+    },
+    {
+      "label": "stage-07",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "fit-final",
+        "--config",
+        "configs/synthetic_study.json",
+        "--features",
+        "outputs/replay/03/features.csv",
+        "--out",
+        "outputs/replay/final_model"
+      ],
+      "exit_code": 0,
+      "seconds": 9.02
+    },
+    {
+      "label": "stage-08",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "predict",
+        "--config",
+        "configs/synthetic_study.json",
+        "--features",
+        "outputs/replay/03/features.csv",
+        "--model",
+        "outputs/replay/final_model/final_model.joblib",
+        "--output",
+        "outputs/replay/predictions_final.csv",
+        "--trust-model"
+      ],
+      "exit_code": 0,
+      "seconds": 7.28
+    },
+    {
+      "label": "stage-09",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "sc",
+        "--config",
+        "configs/synthetic_study.json",
+        "--features",
+        "outputs/replay/predictions_final.csv",
+        "--out",
+        "outputs/replay/sc_final"
+      ],
+      "exit_code": 0,
+      "seconds": 7.49
+    },
+    {
+      "label": "stage-10",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "sc",
+        "--config",
+        "configs/synthetic_study.json",
+        "--features",
+        "outputs/replay/04/selected_oof.csv",
+        "--out",
+        "outputs/replay/sc_oof"
+      ],
+      "exit_code": 0,
+      "seconds": 7.47
+    },
+    {
+      "label": "stage-11",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "similitude",
+        "--config",
+        "configs/synthetic_study.json",
+        "--trenches",
+        "outputs/replay/sc_oof/trench_sc.csv",
+        "--calibration",
+        "outputs/replay/01/calibration.csv",
+        "--out",
+        "outputs/replay/06"
+      ],
+      "exit_code": 0,
+      "seconds": 10.91
+    },
+    {
+      "label": "stage-12",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "sc",
+        "--config",
+        "configs/synthetic_study.json",
+        "--features",
+        "outputs/replay/03/features.csv",
+        "--source",
+        "fesem",
+        "--out",
+        "outputs/replay/sc_fesem"
+      ],
+      "exit_code": 0,
+      "seconds": 7.45
+    },
+    {
+      "label": "stage-13",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "process-window",
+        "--config",
+        "configs/synthetic_study.json",
+        "--calibration",
+        "outputs/replay/01/calibration.csv",
+        "--out",
+        "outputs/replay/07"
+      ],
+      "exit_code": 0,
+      "seconds": 13.12
+    },
+    {
+      "label": "stage-14",
+      "command": [
+        "python",
+        "-m",
+        "cvd_cbd",
+        "study",
+        "uncertainty",
+        "--config",
+        "configs/synthetic_study.json",
+        "--input",
+        "outputs/generated_inputs/uncertainty.json",
+        "--out",
+        "outputs/replay/uncertainty"
+      ],
+      "exit_code": 0,
+      "seconds": 15.09
+    }
+  ],
+  "not_run": [
+    "external original audit 145",
+    "external adapted audit 145",
+    "external independent 89",
+    "Linux",
+    "macOS",
+    "other Python versions",
+    "GitHub Actions",
+    "real experimental performance"
+  ]
+}

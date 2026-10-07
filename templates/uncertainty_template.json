@@ -1,0 +1,21 @@
+{
+  "means": {
+    "w_m": null,
+    "h_m": null,
+    "L_m": null,
+    "G_glass_m_s": null,
+    "G_pdms_m_s": null,
+    "eta_Pa_s": null,
+    "D_ref_m2_s": null,
+    "C0_mol_m3": null,
+    "Vm_m3_mol": null,
+    "top_nm": null,
+    "bot_nm": null
+  },
+  "log_covariance": null,
+  "repeats": 1000,
+  "seed": 0,
+  "T_C": null,
+  "model_discrepancy_sd_fraction": null,
+  "assumptions": "REPLACE null values with independently justified means, covariance and discrepancy assumptions. Not executable until filled."
+}

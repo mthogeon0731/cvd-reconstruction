@@ -1,0 +1,8 @@
+{
+  "rtol": 1e-08,
+  "atol": 1e-10,
+  "identifiers": "exact; no row sorting",
+  "bytes": "separate SHA256 comparison",
+  "added_provenance_columns": "report schema additions and compare pre-existing columns separately",
+  "platforms": "Only current Windows rerun; original Linux results are historical artifacts, not a new Linux execution"
+}

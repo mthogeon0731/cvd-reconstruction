@@ -1,0 +1,22 @@
+{
+  "mode": "uncalibrated_reference_demo",
+  "seed": 20261006,
+  "n_samples": 4000,
+  "width_um": 30.0,
+  "aspect_ratio_range": [1.0, 5.0],
+  "viscosity_mpa_s_range": [1.0, 5.0],
+  "temperature_c_range": [50.0, 80.0],
+  "reference_temperature_c": 65.0,
+  "reference_viscosity_mpa_s": 1.0,
+  "diffusivity_ref_m2_s": 1e-9,
+  "surface_rate_ref_m_s": 1e-7,
+  "activation_energy_j_mol": 30000.0,
+  "bottom_surface_rate_ratio": 0.0,
+  "n_estimators": 200,
+  "min_samples_leaf": 2,
+  "doe_temperature_levels_c": [50.0, 65.0, 80.0],
+  "doe_grid_levels_per_other_factor": 9,
+  "doe_runs": 27,
+  "fdm_nodes": 301,
+  "illustrative_sc_threshold": 0.90
+}
